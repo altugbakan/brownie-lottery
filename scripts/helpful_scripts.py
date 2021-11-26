@@ -3,7 +3,6 @@ from brownie import (
     accounts,
     config,
     Contract,
-    interface,
     MockV3Aggregator,
     MockVRFCoordinator,
     LinkToken,
