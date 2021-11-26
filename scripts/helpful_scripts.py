@@ -48,7 +48,9 @@ def get_contract(contract_name):
     contract_type = contract_to_mock[contract_name]
     if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         if len(contract_type) <= 0:
+            print("Deploying mocks...")
             deploy_mocks()
+            print("Deployed.")
         contract = contract_type[-1]
     else:
         contract_address = config["networks"][network.show_active()][contract_name]
@@ -59,7 +61,6 @@ def get_contract(contract_name):
 
 
 def deploy_mocks(decimals=DECIMALS, initial_value=INITIAL_VALUE):
-    print("Deploying mocks...")
     account = get_account()
     MockV3Aggregator.deploy(decimals, initial_value, {"from": account})
     link_token = LinkToken.deploy({"from": account})
@@ -75,5 +76,4 @@ def fund_with_link(
     # tx = link_token_contract.transfer(contract_address, amount, {"from": account})
     tx = link_token.transfer(contract_address, amount, {"from": account})
     tx.wait(1)
-    print("Funded contract!")
     return tx
