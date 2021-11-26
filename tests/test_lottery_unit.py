@@ -12,9 +12,9 @@ from scripts.helpful_scripts import (
 
 
 def test_get_entrance_fee():
+    # Arrange
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip()
-    # Arrange
     lottery = deploy_lottery()
 
     # Act
